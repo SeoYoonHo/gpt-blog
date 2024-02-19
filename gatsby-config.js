@@ -7,6 +7,19 @@ module.exports = {
 
   plugins: [
     {
+      resolve: 'gatsby-source-apiserver',
+      options: {
+        typePrefix: 'internal__',
+        url: `http://your-backend-server.com/api/posts`,
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        name: `posts`,
+        entityLevel: `data`,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `assets`,
