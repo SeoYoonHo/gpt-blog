@@ -9,19 +9,6 @@ export async function getAllPostsFromNotion() {
   const response = await getAllPost();
   allPosts.push(...response.data?.data?.content);
 
-  // const p = {
-  //   id: "1",
-  //   slug: "2",
-  //   title: "타이틀1",
-  //   categories:["1","2"],
-  //   cover: "cover",
-  //   date: "2023-01-25",
-  //   published: true,
-  //   lastEditedAt: "2023-01-25",
-  // };
-
-  // allPosts.push(p);
-
   // const recordMap = await getRecordMap(process.env.NOTION_DATABASE_ID!);
   // console.log("recordMap", recordMap);
   // const { block, collection } = recordMap;
