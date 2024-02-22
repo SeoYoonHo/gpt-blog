@@ -43,7 +43,7 @@ export default async function PostPage({
       p.categories.some((v) => post.categories.includes(v))
   );
 
-  // const recordMap = await getRecordMap(post.id);
+  const recordMap = await getRecordMap(post.id);
 
   return (
     <>
