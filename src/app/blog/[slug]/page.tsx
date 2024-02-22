@@ -8,6 +8,7 @@ import RelatedPosts from '@/components/posts/related-posts';
 import { getRecordMap } from '@/libs/notion';
 import { getAllPostsFromNotion } from '@/services/posts';
 import { Post } from '@/types/post';
+import Markdown from 'react-markdown';
 
 export default async function PostPage({
   params: { slug },
@@ -60,6 +61,9 @@ export default async function PostPage({
             placeholder="blur"
             blurDataURL={post.blurUrl}
           /> */}
+        </div>
+        <div className="relative aspect-[3/2] w-[60vw] max-w-[900px]">
+          <Markdown>{post.content}</Markdown>
         </div>
         {/* <NotionPage post={post} recordMasp={recordMap} /> */}
       </article>
