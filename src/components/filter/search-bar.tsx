@@ -11,9 +11,14 @@ import useHover from '@/hooks/use-hover';
 import { queryState } from '@/states/query';
 import {createGptPost} from '../../app/api/index'
 
+import {LoaderOverlay} from  './LoadingOverlay'
+
 export default function SearchBar() {
+  const [loading, setLoading] = useState(false);
+
   const [query, setQuery] = useRecoilState(queryState);
   const [tempQry, setTempQry] = useState('');
+  
   const { ref: hoverRef, isHovering } = useHover<HTMLDivElement>();
   const { ref: focusRef, isFocusing } = useFocus<HTMLInputElement>();
 
@@ -30,9 +35,13 @@ export default function SearchBar() {
     try{
       if (e.key === 'Enter') {
         console.log('엔터 키가 눌렸습니다!');
-        const response = await createGptPost();
+        setLoading(true);
+        const response = await createGptPost({
+          contents: tempQry,
+        });
         console.log(response);
-        setQuery(tempQry);
+        location.reload();
+        setQuery(response.data.data.title);
       }
     } catch (error){
       console.log('error dddd', error);
@@ -44,6 +53,7 @@ export default function SearchBar() {
       ref={hoverRef}
       className="relative mx-auto w-[80%] max-w-[24rem] md:mx-0"
     >
+      <LoaderOverlay loading={loading} color="#123abc" />
       <BsSearch className=" absolute left-6 flex h-full items-center text-xl text-gray-400" />
       {query && (isHovering || isFocusing) && (
         <IoMdClose
